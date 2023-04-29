@@ -1,11 +1,11 @@
 ---
 - username: agg23
   cores:
-    - display_name: Arduboy for Analogue Pocket
-      repository: openfpga-arduboy
     - display_name: Tamagotchi P1
       repository: fpga-tamagotchi
       filter: agg23.Tamagotchi_.*-Pocket
+    - display_name: Arduboy for Analogue Pocket
+      repository: openfpga-arduboy
 
 - username: antongale
   cores:
