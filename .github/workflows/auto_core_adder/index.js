@@ -3,7 +3,7 @@ const SNIPPET_REGEX =
   /### Core \.yml snippet\n(?:```yml\n)?([\s\S]*?)(?:\n```)?$/;
 
 module.exports = ({ github, context }) => {
-  const yaml = require("js-yaml");
+  // const yaml = require("js-yaml");
   const body = context.issue.body;
 
   const usernameMatch = body.match(USERNAME_REGEX);
