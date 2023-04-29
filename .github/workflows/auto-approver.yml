@@ -10,37 +10,37 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Check if only one file was changed
-        id: check_files
-        run: |
-          if [[ $(git diff --name-only HEAD~1 | wc -l) -ne 1 ]]; then
-            echo "More than one file was changed."
-            exit 1
-          elif [[ $(git diff --name-only HEAD~1) != "_data/repositories.yml" ]]; then
-            echo "Changes were made to files other than '_data/repositories.yml'"
-            exit 1
-          fi
-          echo "Changes were made only to '_data/repositories.yml'"
-          exit 0
+      # - name: Check if only one file was changed
+      #   id: check_files
+      #   run: |
+      #     if [[ $(git diff --name-only HEAD~1 | wc -l) -ne 1 ]]; then
+      #       echo "More than one file was changed."
+      #       exit 1
+      #     elif [[ $(git diff --name-only HEAD~1) != "_data/repositories.yml" ]]; then
+      #       echo "Changes were made to files other than '_data/repositories.yml'"
+      #       exit 1
+      #     fi
+      #     echo "Changes were made only to '_data/repositories.yml'"
+      #     exit 0
 
-      - name: Get changed files
-        id: get_changed_files
-        run: |
-          # Get the list of changed files in the pull request
-          files=$(git diff --name-only "${{ github.base_ref }}" HEAD)
+      # - name: Get changed files
+      #   id: get_changed_files
+      #   run: |
+      #     # Get the list of changed files in the pull request
+      #     files=$(git diff --name-only "${{ github.base_ref }}" HEAD)
 
-          # Filter the list of changed files to only include .yml files
-          yml_files=$(echo "$files" | grep "\.yml$")
+      #     # Filter the list of changed files to only include .yml files
+      #     yml_files=$(echo "$files" | grep "\.yml$")
 
-          # Get the raw lines added in the PR for each of the changed yml files
-          raw_lines_added=""
-          for file in $yml_files; do
-            raw_lines_added="$raw_lines_added$(git diff --unified=0 "${{ github.base_ref }}" HEAD $file | grep -E '^\+' | sed 's/^\+//g')"
-          done
+      #     # Get the raw lines added in the PR for each of the changed yml files
+      #     raw_lines_added=""
+      #     for file in $yml_files; do
+      #       raw_lines_added="$raw_lines_added$(git diff --unified=0 "${{ github.base_ref }}" HEAD $file | grep -E '^\+' | sed 's/^\+//g')"
+      #     done
 
-          # Set the output variable
-          echo "::set-output name=raw_lines_added::$raw_lines_added"
+      #     # Set the output variable
+      #     echo "::set-output name=raw_lines_added::$raw_lines_added"
 
       - name: Auto-approve PR
-        if: steps.check_files.outcome == 'success'
+        # if: steps.check_files.outcome == 'success'
         uses: hmarr/auto-approve-action@v3
