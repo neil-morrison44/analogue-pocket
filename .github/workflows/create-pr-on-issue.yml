@@ -8,15 +8,13 @@ jobs:
   process_issue:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - run: npm install -g js-yaml
-
       - uses: actions/github-script@v6
         with:
           script: |
             const script = require('./.github/workflows/auto_core_adder/index.js')
             console.log(script({github, context}))
-
-      - uses: actions/checkout@v3
 
       # - name: Create Pull Request
       #   uses: peter-evans/create-pull-request@v5
