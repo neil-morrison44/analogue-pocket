@@ -1,0 +1,26 @@
+name: Process Issues
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  process_issue:
+    runs-on: ubuntu-latest
+    steps:
+      - run: npm install -g js-yaml
+
+      - name: Check if automatic issue
+        id: auto-pr-issue-check
+        run: ${{ github.event.issue.body }}
+
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            const script = require('./auto_core_adder/index.js')
+            console.log(script({github, context}))
+
+      - uses: actions/checkout@v3
+
+      # - name: Create Pull Request
+      #   uses: peter-evans/create-pull-request@v5

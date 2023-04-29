@@ -1,0 +1,23 @@
+name: Add Core
+description: Add a new core
+title: "[New Core]: "
+labels: ["new-core"]
+body:
+  - type: input
+    id: author-username
+    attributes:
+      label: Core Author username
+      description: The core author's name on github
+      placeholder: ex. spiritualized1997
+    validations:
+      required: true
+  - type: textarea
+    id: yml-snippet
+    attributes:
+      label: Core .yml snippet
+      description: The yml object for the core, see https://github.com/openfpga-cores-inventory/analogue-pocket/blob/main/_data/repositories.yml for examples
+      placeholder: |
+        - display_name: Spiritualized Atari 2600
+          repository: openFPGA-2600
+    validations:
+      required: true
