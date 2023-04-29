@@ -10,10 +10,6 @@ jobs:
     steps:
       - run: npm install -g js-yaml
 
-      - name: Check if automatic issue
-        id: auto-pr-issue-check
-        run: ${{ github.event.issue.body }}
-
       - uses: actions/github-script@v6
         with:
           script: |
