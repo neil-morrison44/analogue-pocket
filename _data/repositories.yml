@@ -13,9 +13,6 @@
       repository: openfpga-pokemonmini
     - display_name: SNES for Analogue Pocket
       repository: openfpga-SNES
-    - display_name: Tamagotchi P1
-      repository: fpga-tamagotchi
-      filter: agg23.Tamagotchi_.*-Pocket
     - display_name: WonderSwan Color for Analogue Pocket
       repository: openfpga-wonderswan
 
@@ -43,9 +40,6 @@
       prerelease: true
     - display_name: Q*Bert
       repository: openfpga-qbert
-    - display_name: Radar Scope
-      repository: openFPGA-RadarScope
-      prerelease: true
     - display_name: Space Race for Analogue Pocket
       repository: openfpga-spacerace
     - display_name: Super Breakout for Analogue Pocket
@@ -60,9 +54,6 @@
     - display_name: CPS1
       repository: jtbin
       path: pocket/zips/jotego.jtcps1.zip
-    - display_name: Double Dragon
-      repository: jtbin
-      path: pocket/zips/jotego.jtdd.zip
     - display_name: Double Dragon II
       repository: jtbin
       path: pocket/zips/jotego.jtdd2.zip
