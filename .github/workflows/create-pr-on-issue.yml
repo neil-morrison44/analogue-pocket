@@ -1,4 +1,4 @@
-name: Process Issues
+name: Create PR on Issue
 
 on:
   issues:

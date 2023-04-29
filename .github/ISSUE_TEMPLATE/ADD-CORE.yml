@@ -17,7 +17,9 @@ body:
       label: Core .yml snippet
       description: The yml object for the core, see https://github.com/openfpga-cores-inventory/analogue-pocket/blob/main/_data/repositories.yml for examples
       placeholder: |
-        - display_name: Spiritualized Atari 2600
-          repository: openFPGA-2600
+        ```yml
+        display_name: Spiritualized Atari 2600
+        repository: openFPGA-2600
+        ```
     validations:
       required: true
