@@ -13,7 +13,7 @@ jobs:
       - uses: actions/github-script@v6
         with:
           script: |
-            const script = require('./auto_core_adder/index.js')
+            const script = require('./.github/workflows/auto_core_adder/index.js')
             console.log(script({github, context}))
 
       - uses: actions/checkout@v3
