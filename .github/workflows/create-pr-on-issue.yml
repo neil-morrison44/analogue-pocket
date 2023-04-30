@@ -16,5 +16,5 @@ jobs:
             const script = require('./.github/workflows/auto_core_adder/index.js')
             console.log(script({github, context}))
 
-      # - name: Create Pull Request
-      #   uses: peter-evans/create-pull-request@v5
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
