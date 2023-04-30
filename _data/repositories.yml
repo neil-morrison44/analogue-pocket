@@ -18,6 +18,9 @@
     - display_name: Contra
       repository: jtbin
       path: pocket/zips/jotego.jtcontra.zip
+    - display_name: CPS1
+      repository: jtbin
+      path: pocket/zips/jotego.jtcps1.zip
 - username: Mazamars312
   cores:
     - display_name: Amiga 500
