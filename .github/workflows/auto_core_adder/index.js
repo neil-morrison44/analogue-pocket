@@ -12,7 +12,7 @@ module.exports = ({ github, context }) => {
 
   if (usernameMatch && snippetMatch) {
     const username = usernameMatch[1];
-    const snippet = snippetMatch[1];
+    const snippet = snippetMatch[2];
 
     console.log(username);
     console.log(snippet);
