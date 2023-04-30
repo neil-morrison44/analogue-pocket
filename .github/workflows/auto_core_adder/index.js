@@ -63,12 +63,20 @@ module.exports = ({ github, context }) => {
       { username, cores: [...currentCores, yamlSnippet] },
     ];
 
+    console.log(newReposFile);
+
     fs.writeFileSync(
       "_data/repositories_new.yml",
       yaml.dump(newReposFile, { noRefs: true })
     );
 
     console.log("Have written file");
+
+    const readback = yaml.load(
+      fs.readFileSync("_data/repositories_new.yml", "utf8")
+    );
+
+    console.log(readback);
   }
 
   return context.payload.issue.body;
