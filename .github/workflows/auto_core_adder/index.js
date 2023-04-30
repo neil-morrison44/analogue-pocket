@@ -56,6 +56,8 @@ module.exports = ({ github, context }) => {
 
     console.log(existsAlready);
 
+    if (existsAlready) return;
+
     const newReposFile = [
       ...reposFile.filter(({ username: u }) => u !== username),
       { username, cores: [...currentCores, yamlSnippet] },
