@@ -15,6 +15,7 @@ jobs:
           script: |
             const script = require('./.github/workflows/auto_core_adder/index.js')
             console.log(script({github, context}))
+      - run: cat _data/repositories_new.yml
       - run: git status
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
