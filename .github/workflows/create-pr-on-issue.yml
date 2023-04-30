@@ -20,9 +20,17 @@ jobs:
             const script = require('./.github/workflows/auto_core_adder/index.js')
             console.log(script({github, context}))
       - run: git status
+      - uses: tibdex/github-app-token@v1
+        id: generate-token
+        with:
+          app_id: ${{ secrets.PR_CREATOR_APP_ID }}
+          private_key: ${{ secrets.PR_CREATOR_PRIVATE_KEY }}
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v5
+        with:
+          title: AUTOMATED PR FOR - ${{ github.event.issue.title }}
+          token: ${{ steps.generate-token.outputs.token }}
       - name: Enable Pull Request Automerge
         run: gh pr merge --merge --auto "${{ steps.cpr.outputs.pull-request-number }}"
         env:
