@@ -2,8 +2,6 @@
   cores:
     - display_name: Arduboy for Analogue Pocket
       repository: openfpga-arduboy
-    - display_name: SNES for Analogue Pocket
-      repository: openfpga-SNES
 - username: antongale
   cores:
     - display_name: Exerion
