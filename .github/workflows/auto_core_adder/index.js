@@ -13,6 +13,9 @@ module.exports = ({ github, context }) => {
   if (usernameMatch && snippetMatch) {
     const username = usernameMatch[1].trim();
     const snippet = snippetMatch[1]
+      .replace("```yml", "")
+      .replace("```", "")
+      .trim()
       .split("\n")
       .map((l) => l.trim())
       .join("\n");
