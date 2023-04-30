@@ -63,6 +63,8 @@ module.exports = ({ github, context }) => {
       { username, cores: [...currentCores, yamlSnippet] },
     ];
 
+    newReposFile.sort((a, b) => a.username.localeCompare(b.username));
+
     fs.writeFileSync(
       "_data/repositories.yml",
       yaml.dump(newReposFile, { noRefs: true })
