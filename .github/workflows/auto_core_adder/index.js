@@ -65,6 +65,8 @@ module.exports = ({ github, context }) => {
       "_data/repositories_new.yml",
       yaml.dump(newReposFile, { noRefs: true })
     );
+
+    console.log("Have written file");
   }
 
   return context.payload.issue.body;
