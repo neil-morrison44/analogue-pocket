@@ -5,7 +5,7 @@ const SNIPPET_REGEX =
 module.exports = ({ github, context }) => {
   // const yaml = require("js-yaml");
   console.log(context);
-  const body = context.issue.body;
+  const body = context.payload.issue.body;
 
   const usernameMatch = body.match(USERNAME_REGEX);
   const snippetMatch = body.match(SNIPPET_REGEX);
