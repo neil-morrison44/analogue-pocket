@@ -40,6 +40,9 @@
     - display_name: Batrider
       repository: pram0d-pocket-dist-public
       path: releases/pram0d.batrider_20221218.zip
+    - display_name: Snow Bros. 2
+      repository: pram0d-pocket-dist-public
+      path: releases/pram0d.snowbros2_20221019.zip
 - username: spacemen3
   cores:
     - display_name: PDP-1
