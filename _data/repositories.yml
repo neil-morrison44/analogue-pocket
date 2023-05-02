@@ -4,6 +4,8 @@
       repository: openfpga-arduboy
     - display_name: SNES for Analogue Pocket
       repository: openfpga-SNES
+    - display_name: Atari's 1972 Pong
+      repository: openfpga-pong
 - username: antongale
   cores:
     - display_name: Exerion
