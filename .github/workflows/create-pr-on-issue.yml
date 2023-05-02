@@ -15,10 +15,11 @@ jobs:
       - uses: actions/checkout@v3
       - run: npm install js-yaml
       - uses: actions/github-script@v6
+        id: read-issue-modify-yml
         with:
           script: |
             const script = require('./.github/workflows/auto_core_adder/index.js')
-            console.log(script({github, context}))
+            return script({github, context})
       - run: git status
       - uses: tibdex/github-app-token@v1
         id: generate-token
@@ -37,6 +38,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Approve the new PR
+        if: ${{steps.read-issue-modify-yml.outputs.result.knownAuthor}}
         run: gh pr review --approve "${{ steps.cpr.outputs.pull-request-number }}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -23,7 +23,21 @@ module.exports = ({ github, context }) => {
     console.log("username", username);
     console.log("snippet", snippet);
 
-    const yamlSnippet = yaml.load(snippet);
+    let yamlSnippet = null;
+
+    try {
+      yamlSnippet = yaml.load(snippet);
+    } catch (err) {
+      github.rest.issues.createComment({
+        issue_number: context.issue.number,
+        owner: context.repo.owner,
+        repo: context.repo.repo,
+        body: `Error processing the yaml snippet, sorry`,
+      });
+
+      return {};
+    }
+
     const reposFile = yaml.load(
       fs.readFileSync("_data/repositories.yml", "utf8")
     );
@@ -32,11 +46,19 @@ module.exports = ({ github, context }) => {
       .map(({ username }) => username)
       .includes(username);
 
-    if (!knownAuthor) return;
+    if (!knownAuthor) {
+      github.rest.issues.createComment({
+        issue_number: context.issue.number,
+        owner: context.repo.owner,
+        repo: context.repo.repo,
+        body: `Looks like ${username} doesn't have any cores in the inventory yet.
+        So the PR'll require manual approval.`,
+      });
+    }
 
-    const currentCores = reposFile.find(
-      ({ username: u }) => u === username
-    ).cores;
+    const currentCores = knownAuthor
+      ? reposFile.find(({ username: u }) => u === username).cores
+      : [];
 
     const existsAlready = Boolean(
       currentCores.find(
@@ -45,7 +67,16 @@ module.exports = ({ github, context }) => {
       )
     );
 
-    if (existsAlready) return;
+    if (existsAlready) {
+      github.rest.issues.createComment({
+        issue_number: context.issue.number,
+        owner: context.repo.owner,
+        repo: context.repo.repo,
+        body: "Looks like that core exists already",
+      });
+
+      return { username, knownAuthor, existsAlready };
+    }
 
     const newReposFile = [
       ...reposFile.filter(({ username: u }) => u !== username),
@@ -60,5 +91,5 @@ module.exports = ({ github, context }) => {
     );
   }
 
-  return context.payload.issue.body;
+  return { username, knownAuthor, existsAlready };
 };
