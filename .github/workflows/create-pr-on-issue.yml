@@ -45,7 +45,7 @@ jobs:
 
       - name: Parse JSON
         run: |
-          echo "${{ steps.read-issue-modify-yml.outputs.result }}" | jq '.'
+          echo '${{ steps.read-issue-modify-yml.outputs.result }}' | jq '.'
 
       - name: Get result (all)
         run: echo "${{steps.read-issue-modify-yml.outputs.result}}"
