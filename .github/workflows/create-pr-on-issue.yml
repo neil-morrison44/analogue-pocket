@@ -22,7 +22,7 @@ jobs:
           script: |
             const script = require('./.github/workflows/auto_core_adder/index.js')
             const result = script({github, context})
-            # console.log(result)
+            // console.log(result)
 
             return result
       - run: git status
