@@ -89,7 +89,9 @@ module.exports = ({ github, context }) => {
       "_data/repositories.yml",
       yaml.dump(newReposFile, { noRefs: true })
     );
+
+    return { username, knownAuthor, existsAlready };
   }
 
-  return { username, knownAuthor, existsAlready };
+  return {};
 };
