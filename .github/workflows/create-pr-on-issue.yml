@@ -43,9 +43,9 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Parse JSON
-        run: |
-          echo "${{ steps.read-issue-modify-yml.outputs.result }}" | jq '.'
+      # - name: Parse JSON
+      #   run: |
+      #     echo "${{ steps.read-issue-modify-yml.outputs.result }}" | jq '.'
 
       - name: Get result (all)
         run: echo "${{steps.read-issue-modify-yml.outputs.result}}"
