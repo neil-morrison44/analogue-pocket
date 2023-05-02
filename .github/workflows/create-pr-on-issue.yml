@@ -39,22 +39,8 @@ jobs:
         run: gh pr merge --squash --auto "${{ steps.cpr.outputs.pull-request-number }}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Parse JSON
-        run: |
-          echo '${{ steps.read-issue-modify-yml.outputs.result }}' | jq '.'
-
-      - name: Get result (all)
-        run: echo "${{steps.read-issue-modify-yml.outputs.result}}"
-
-      - name: Get result (username)
-        run: echo "${{steps.read-issue-modify-yml.outputs.username}}"
-
-      - name: Get result
-        run: echo "${{steps.read-issue-modify-yml.outputs.known-author}}"
-
       - name: Approve the new PR
-        if: steps.read-issue-modify-yml.outputs.known-author == true
+        if: fromJSON(steps.read-issue-modify-yml.outputs.known-author)
         run: gh pr review --approve "${{ steps.cpr.outputs.pull-request-number }}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
