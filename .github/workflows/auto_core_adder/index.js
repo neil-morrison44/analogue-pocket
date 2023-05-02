@@ -27,6 +27,7 @@ module.exports = ({ github, context }) => {
 
     try {
       yamlSnippet = yaml.load(snippet);
+      console.log(yamlSnippet);
     } catch (err) {
       github.rest.issues.createComment({
         issue_number: context.issue.number,
@@ -51,8 +52,9 @@ module.exports = ({ github, context }) => {
         issue_number: context.issue.number,
         owner: context.repo.owner,
         repo: context.repo.repo,
-        body: `Looks like ${username} doesn't have any cores in the inventory yet.
-        So the PR'll require manual approval.`,
+        body: `Thanks for the submission!
+        Looks like \`${username}\` doesn't have any cores in the inventory yet.
+        So the PR'll require manual approval`,
       });
     }
 
@@ -72,7 +74,8 @@ module.exports = ({ github, context }) => {
         issue_number: context.issue.number,
         owner: context.repo.owner,
         repo: context.repo.repo,
-        body: "Looks like that core exists already",
+        body: `Thanks for the submission!
+        Looks like that core is in the inventory already`,
       });
 
       return { username, knownAuthor, existsAlready };
