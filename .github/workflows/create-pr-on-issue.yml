@@ -18,6 +18,7 @@ jobs:
       - uses: actions/github-script@v6
         id: read-issue-modify-yml
         with:
+          result-encoding: json
           script: |
             const script = require('./.github/workflows/auto_core_adder/index.js')
             const result = script({github, context})
@@ -40,6 +41,9 @@ jobs:
         run: gh pr merge --squash --auto "${{ steps.cpr.outputs.pull-request-number }}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Get result (all)
+        run: echo "${{steps.read-issue-modify-yml.outputs}}"
 
       - name: Get result (username)
         run: echo "${{steps.read-issue-modify-yml.outputs.result.username}}"
