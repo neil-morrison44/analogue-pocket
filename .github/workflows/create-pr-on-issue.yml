@@ -24,7 +24,7 @@ jobs:
             const result = script({github, context})
             console.log(JSON.stringify(result))
 
-            return JSON.stringify(result)
+            return result
       - run: git status
       - uses: tibdex/github-app-token@v1
         id: generate-token
