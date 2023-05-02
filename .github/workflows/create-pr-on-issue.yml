@@ -41,11 +41,14 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Get result (username)
+        run: echo "${{steps.read-issue-modify-yml.outputs.result.username}}"
+
       - name: Get result
         run: echo "${{steps.read-issue-modify-yml.outputs.result.knownAuthor}}"
 
       - name: Approve the new PR
-        if: steps.read-issue-modify-yml.outputs.result.knownAuthor
+        if: steps.read-issue-modify-yml.outputs.result.knownAuthor == true
         run: gh pr review --approve "${{ steps.cpr.outputs.pull-request-number }}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
