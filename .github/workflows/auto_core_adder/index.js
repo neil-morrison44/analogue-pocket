@@ -20,14 +20,10 @@ module.exports = ({ github, context }) => {
       .map((l) => l.trim())
       .join("\n");
 
-    console.log("username", username);
-    console.log("snippet", snippet);
-
     let yamlSnippet = null;
 
     try {
       yamlSnippet = yaml.load(snippet);
-      console.log(yamlSnippet);
     } catch (err) {
       github.rest.issues.createComment({
         issue_number: context.issue.number,

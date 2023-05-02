@@ -22,8 +22,7 @@ jobs:
           script: |
             const script = require('./.github/workflows/auto_core_adder/index.js')
             const result = script({github, context})
-            console.log(result)
-            return result
+            console.log(JSON.stringify(result))
       - run: git status
       - uses: tibdex/github-app-token@v1
         id: generate-token
@@ -43,13 +42,13 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Get result (all)
-        run: echo "${{steps.read-issue-modify-yml.outputs}}"
+        run: echo "${{steps.read-issue-modify-yml.outputs.result}}"
 
       - name: Get result (username)
-        run: echo "${{steps.read-issue-modify-yml.outputs.username}}"
+        run: echo "${{steps.read-issue-modify-yml.outputs.result.username}}"
 
       - name: Get result
-        run: echo "${{steps.read-issue-modify-yml.outputs.knownAuthor}}"
+        run: echo "${{steps.read-issue-modify-yml.outputs.result.knownAuthor}}"
 
       - name: Approve the new PR
         if: steps.read-issue-modify-yml.outputs.knownAuthor == true
