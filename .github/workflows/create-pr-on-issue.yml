@@ -48,7 +48,7 @@ jobs:
         run: echo "${{steps.read-issue-modify-yml.outputs.result}}"
 
       - name: Get result (username)
-        run: echo "${{fromJSON(steps.read-issue-modify-yml.outputs.username)}}"
+        run: echo "${{steps.read-issue-modify-yml.outputs.username}}"
 
       - name: Get result
         run: echo "${{steps.read-issue-modify-yml.outputs.known-author}}"
