@@ -22,7 +22,7 @@ jobs:
           script: |
             const script = require('./.github/workflows/auto_core_adder/index.js')
             const result = script({github, context})
-            console.log(JSON.stringify(result))
+            console.log(result)
 
             return result
       - run: git status
@@ -43,9 +43,9 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # - name: Parse JSON
-      #   run: |
-      #     echo "${{ steps.read-issue-modify-yml.outputs.result }}" | jq '.'
+      - name: Parse JSON
+        run: |
+          echo "${{ steps.read-issue-modify-yml.outputs.result }}" | jq '.'
 
       - name: Get result (all)
         run: echo "${{steps.read-issue-modify-yml.outputs.result}}"
