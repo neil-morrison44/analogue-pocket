@@ -46,13 +46,13 @@ jobs:
         run: echo "${{steps.read-issue-modify-yml.outputs}}"
 
       - name: Get result (username)
-        run: echo "${{steps.read-issue-modify-yml.outputs.result.username}}"
+        run: echo "${{steps.read-issue-modify-yml.outputs.username}}"
 
       - name: Get result
-        run: echo "${{steps.read-issue-modify-yml.outputs.result.knownAuthor}}"
+        run: echo "${{steps.read-issue-modify-yml.outputs.knownAuthor}}"
 
       - name: Approve the new PR
-        if: steps.read-issue-modify-yml.outputs.result.knownAuthor == true
+        if: steps.read-issue-modify-yml.outputs.knownAuthor == true
         run: gh pr review --approve "${{ steps.cpr.outputs.pull-request-number }}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
