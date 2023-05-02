@@ -23,6 +23,8 @@ jobs:
             const script = require('./.github/workflows/auto_core_adder/index.js')
             const result = script({github, context})
             console.log(JSON.stringify(result))
+
+            return JSON.stringify(result)
       - run: git status
       - uses: tibdex/github-app-token@v1
         id: generate-token
