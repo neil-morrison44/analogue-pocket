@@ -2,7 +2,7 @@ const USERNAME_REGEX = /### Core Author username\n\n(.+)/;
 const SNIPPET_REGEX =
   /### Core \.yml snippet\s+(?:```yml\n)?([\s\S]*?)(?:\s*```)?\s*$/;
 
-module.exports = ({ github, context }) => {
+module.exports = ({ github, context, core }) => {
   const yaml = require("js-yaml");
   const fs = require("fs");
   const body = context.payload.issue.body;
@@ -12,6 +12,9 @@ module.exports = ({ github, context }) => {
 
   if (usernameMatch && snippetMatch) {
     const username = usernameMatch[1].trim().replace("@", "");
+
+    core.setOutput("username", username);
+
     const snippet = snippetMatch[1]
       .replace("```yml", "")
       .replace("```", "")
@@ -43,6 +46,8 @@ module.exports = ({ github, context }) => {
       .map(({ username }) => username)
       .includes(username);
 
+    core.setOutput("known-author", knownAuthor);
+
     if (!knownAuthor) {
       github.rest.issues.createComment({
         issue_number: context.issue.number,
@@ -64,6 +69,8 @@ module.exports = ({ github, context }) => {
         (c) => JSON.stringify(c) === JSON.stringify(yamlSnippet)
       )
     );
+
+    core.setOutput("exists-already", existsAlready);
 
     if (existsAlready) {
       github.rest.issues.createComment({
