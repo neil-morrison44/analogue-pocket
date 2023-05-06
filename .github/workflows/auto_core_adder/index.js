@@ -34,7 +34,7 @@ module.exports = ({ github, context, core }) => {
         repo: context.repo.repo,
         body: `Error processing the yaml snippet, sorry`,
       });
-
+      core.setOutput("close-issue", false);
       return {};
     }
 
@@ -81,6 +81,8 @@ module.exports = ({ github, context, core }) => {
         Looks like that core is in the inventory already`,
       });
 
+      core.setOutput("close-issue", true);
+
       return { username, knownAuthor, existsAlready };
     }
 
@@ -95,7 +97,7 @@ module.exports = ({ github, context, core }) => {
       "_data/repositories.yml",
       yaml.dump(newReposFile, { noRefs: true })
     );
-
+    core.setOutput("close-issue", false);
     return { username, knownAuthor, existsAlready };
   }
 
