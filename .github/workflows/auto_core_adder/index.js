@@ -1,4 +1,4 @@
-const USERNAME_REGEX = /### Core Author username\n\n(.+)/;
+const USERNAME_REGEX = /### Core Author username\n+(.+)/;
 const SNIPPET_REGEX =
   /### Core \.yml snippet\s+(?:```yml\n)?([\s\S]*?)(?:\s*```)?\s*$/;
 
