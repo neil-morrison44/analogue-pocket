@@ -108,5 +108,7 @@ module.exports = ({ github, context, core }) => {
     `Username Regex: ${usernameMatch}, Snippet Regex: ${snippetMatch}`
   );
 
+  console.error(body);
+
   return {};
 };
