@@ -25,7 +25,7 @@ jobs:
             console.log(result)
 
       - name: Close Issue if existing core
-        if: steps.read-issue-modify-yml.outputs.close-issue
+        if: fromJSON(steps.read-issue-modify-yml.outputs.close-issue)
         run: gh issue close
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
