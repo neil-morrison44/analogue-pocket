@@ -104,5 +104,9 @@ module.exports = ({ github, context, core }) => {
     return { username, knownAuthor, existsAlready };
   }
 
+  console.error(
+    `Username Regex: ${usernameMatch}, Snippet Regex: ${snippetMatch}`
+  );
+
   return {};
 };
