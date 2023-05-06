@@ -34,6 +34,9 @@ module.exports = ({ github, context, core }) => {
         repo: context.repo.repo,
         body: `Error processing the yaml snippet, sorry`,
       });
+
+      console.log(err);
+
       core.setOutput("close-issue", false);
       return {};
     }
